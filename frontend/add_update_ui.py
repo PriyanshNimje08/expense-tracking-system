@@ -1,19 +1,16 @@
 import streamlit as st
 from datetime import datetime
-import requests
+import pandas as pd
 
-API_URL = "http://localhost:8000"
+if "expenses" not in st.session_state:
+    st.session_state.expenses = {}
 
 
 def add_update_tab():
-    selected_date = st.date_input("Enter Date", datetime(2024, 8, 1), label_visibility="collapsed")
-    response = requests.get(f"{API_URL}/expenses/{selected_date}")
-    if response.status_code == 200:
-        existing_expenses = response.json()
-        # st.write(existing_expenses)
-    else:
-        st.error("Failed to retrieve expenses")
-        existing_expenses = []
+    selected_date = st.date_input("Enter Date", datetime(2024, 8, 1))
+    date_str = str(selected_date)
+
+    existing_expenses = st.session_state.expenses.get(date_str, [])
 
     categories = ["Rent", "Food", "Shopping", "Entertainment", "Other"]
 
@@ -39,26 +36,19 @@ def add_update_tab():
 
             col1, col2, col3 = st.columns(3)
             with col1:
-                amount_input = st.number_input(label="Amount", min_value=0.0, step=1.0, value=amount, key=f"amount_{i}",
-                                               label_visibility="collapsed")
+                amount_input = st.number_input("", value=amount, key=f"amount_{i}")
             with col2:
-                category_input = st.selectbox(label="Category", options=categories, index=categories.index(category),
-                                              key=f"category_{i}", label_visibility="collapsed")
+                category_input = st.selectbox("", options=categories, index=categories.index(category),
+                                              key=f"category_{i}")
             with col3:
-                notes_input = st.text_input(label="Notes", value=notes, key=f"notes_{i}", label_visibility="collapsed")
+                notes_input = st.text_input("", value=notes, key=f"notes_{i}")
 
-            expenses.append({
-                'amount': amount_input,
-                'category': category_input,
-                'notes': notes_input
-            })
+            expenses.append({'amount': amount_input, 'category': category_input, 'notes': notes_input})
 
-        submit_button = st.form_submit_button()
-        if submit_button:
-            filtered_expenses = [expense for expense in expenses if expense['amount'] > 0]
+        if st.form_submit_button("Save"):
+            filtered = [exp for exp in expenses if exp['amount'] > 0]
+            st.session_state.expenses[date_str] = filtered
+            st.success("Expenses updated!")
 
-            response = requests.post(f"{API_URL}/expenses/{selected_date}", json=filtered_expenses)
-            if response.status_code == 200:
-                st.success("Expenses updated successfully!")
-            else:
-                st.error("Failed to update expenses.")
+    if st.session_state.expenses.get(date_str):
+        st.table(pd.DataFrame(st.session_state.expenses[date_str]))
