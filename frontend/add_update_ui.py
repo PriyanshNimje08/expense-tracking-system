@@ -2,7 +2,7 @@ import streamlit as st
 from datetime import datetime
 import pandas as pd
 
-# Session me data store
+# Session me data store hoga
 if "expenses" not in st.session_state:
     st.session_state.expenses = {}
 
@@ -42,5 +42,6 @@ def add_update_tab():
             st.session_state.expenses[date_str] = filtered
             st.success("Expenses updated!")
 
+    # Table me show karo
     if st.session_state.expenses.get(date_str):
         st.table(pd.DataFrame(st.session_state.expenses[date_str]))
