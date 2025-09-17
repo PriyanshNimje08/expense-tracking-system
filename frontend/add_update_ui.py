@@ -2,6 +2,7 @@ import streamlit as st
 from datetime import datetime
 import pandas as pd
 
+# Session me data store
 if "expenses" not in st.session_state:
     st.session_state.expenses = {}
 
@@ -11,24 +12,15 @@ def add_update_tab():
     date_str = str(selected_date)
 
     existing_expenses = st.session_state.expenses.get(date_str, [])
-
     categories = ["Rent", "Food", "Shopping", "Entertainment", "Other"]
 
     with st.form(key="expense_form"):
-        col1, col2, col3 = st.columns(3)
-        with col1:
-            st.text("Amount")
-        with col2:
-            st.text("Category")
-        with col3:
-            st.text("Notes")
-
         expenses = []
         for i in range(5):
             if i < len(existing_expenses):
                 amount = existing_expenses[i]['amount']
-                category = existing_expenses[i]["category"]
-                notes = existing_expenses[i]["notes"]
+                category = existing_expenses[i]['category']
+                notes = existing_expenses[i]['notes']
             else:
                 amount = 0.0
                 category = "Shopping"
