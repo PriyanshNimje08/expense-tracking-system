@@ -117,9 +117,18 @@ streamlit run frontend/app.py
 (Add your screenshots & screen recordings here after uploading them to a public location)
 
 * Adding/Updating Expenses
+* <img width="2560" height="1600" alt="image" src="https://github.com/user-attachments/assets/9054354b-9d1c-4d7e-bdba-e886cfb45b65" />
+
 * SQL Database View
+* <img width="1665" height="1222" alt="image" src="https://github.com/user-attachments/assets/c4772c70-2a86-4f75-929a-2974e1dc329f" />
+
 * Server Log File
+* <img width="2560" height="1600" alt="image" src="https://github.com/user-attachments/assets/ca310f94-ef28-46f9-92ef-d4e00a082e68" />
+
 * Expense Analytics Charts
+* <img width="2560" height="1600" alt="image" src="https://github.com/user-attachments/assets/8fe04726-ee6e-4d79-ba9b-8e2b37231481" />
+<img width="2560" height="1600" alt="image" src="https://github.com/user-attachments/assets/c1e94a15-4ca7-4fe9-afda-942213dd3d4d" />
+https://github.com/mehulcode12/codebasics_expense_tracking_with_sqlServer_FastAPI_Logging_Streamlit_pyDantic/blob/main/Screenshots/Screenshot%202025-04-04%20211306.png
 
 ---
 
@@ -145,8 +154,4 @@ Contributions are welcome! 🚀
 3. Commit your changes with clear messages
 4. Push the branch and create a Pull Request
 
-For major changes, open an issue first to discuss proposed modifications.
 
----
-
-क्या आप चाहोगे कि मैं इसमें **badges (Python, FastAPI, Streamlit, MySQL, MIT License)** भी डाल दूँ ताकि README और professional लगे?
